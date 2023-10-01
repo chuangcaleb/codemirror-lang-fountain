@@ -30,10 +30,10 @@ Finally, import your bundled script in your target html like so!
 <!DOCTYPE html>
 <meta charset="utf8" />
 <head>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="demo/styles.css" />
 </head>
 <h1>CodeMirror!</h1>
-<script src="editor.bundle.js"></script>
+<script src="demo/editor.bundle.js"></script>
 ```
 
 ## Features
