@@ -1,6 +1,6 @@
 # codemirror-lang-fountain
 
-**Naive CM5 StreamParser implementation for the [Fountain screenplay syntax](https://fountain.io/).**
+**Naive CM5 StreamParser implementation for the [Fountain screenplay syntax](https://fountain.io/).** (currently abandoned)
 
 ![demo screenshot](docs/demo.png)
 
