@@ -2,6 +2,8 @@
 
 **Naive CM5 StreamParser implementation for the [Fountain screenplay syntax](https://fountain.io/).** (currently abandoned)
 
+Try it out in this (live demo)(<https://chuangcaleb.github.io/codemirror-lang-fountain/>)!
+
 ![demo screenshot](docs/demo.png)
 
 ## Usage
@@ -57,6 +59,6 @@ My original purpose was to have syntax highlighting for Fountain in [Obsidian](h
 
 Oh, and centered text is kinda broken rn.
 
-My original intent has now shifted strategy to use CodeMirror's Decoration API instead as a native Obsidian plugin. You may find interesting [chuangcaleb/obsidian-live-fountain](https://github.com/chuangcaleb/obsidian-live-fountain).
+My original intent has now shifted strategy to use CodeMirror's Decoration API instead, as a native Obsidian plugin. You may find this project at  [chuangcaleb/obsidian-live-fountain](https://github.com/chuangcaleb/obsidian-live-fountain).
 
-I have therefore abandoned this project and archived it. Feel free to use/modify however you wish..
+I have therefore abandoned this project and archived it. Feel free to use/modify however you wish!
