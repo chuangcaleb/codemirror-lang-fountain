@@ -1,0 +1,7 @@
+.cm-scroller {
+  margin: auto;
+}
+.cm-line {
+  white-space: pre-wrap;
+  max-width: 80ch;
+}

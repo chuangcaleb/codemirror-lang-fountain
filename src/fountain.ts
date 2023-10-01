@@ -1,5 +1,10 @@
-import { Extension } from "@codemirror/state";
-import { LanguageSupport, StreamLanguage } from "@codemirror/language";
+import { HighlightStyle, LanguageSupport, StreamLanguage } from "@codemirror/language";
+import {
+  EditorView,
+  PluginValue,
+  ViewPlugin,
+  ViewUpdate,
+} from "@codemirror/view";
 import { tags as t } from "@lezer/highlight";
 
 const tokenTypes = {
@@ -23,18 +28,6 @@ const tokenTypes = {
 
   page_break: /^\={3,}$/,
   // line_break: /^ {2}$/,
-
-  // emphasis: /(_|\*{1,3}|_\*{1,3}|\*{1,3}_)(.+)(_|\*{1,3}|_\*{1,3}|\*{1,3}_)/g,
-  // bold_italic_underline:
-  //   /(_{1}\*{3}(?=.+\*{3}_{1})|\*{3}_{1}(?=.+_{1}\*{3}))(.+?)(\*{3}_{1}|_{1}\*{3})/g,
-  // bold_underline:
-  //   /(_{1}\*{2}(?=.+\*{2}_{1})|\*{2}_{1}(?=.+_{1}\*{2}))(.+?)(\*{2}_{1}|_{1}\*{2})/g,
-  // italic_underline:
-  //   /(?:_{1}\*{1}(?=.+\*{1}_{1})|\*{1}_{1}(?=.+_{1}\*{1}))(.+?)(\*{1}_{1}|_{1}\*{1})/g,
-  // bold_italic: /(\*{3}(?=.+\*{3}))(.+?)(\*{3})/g,
-  // bold: /(\*{2}(?=.+\*{2}))(.+?)(\*{2})/g,
-  // italic: /(\*{1}(?=.+\*{1}))(.+?)(\*{1})/g,
-  // underline: /(_{1}(?=.+_{1}))(.+?)(_{1})/g,
 };
 
 function tokenize(stream, state) {
@@ -75,10 +68,6 @@ export const fountainLanguage = StreamLanguage.define({
   }),
   token: tokenize,
   blankLine: handleBlank,
-  languageData: {
-    closeBrackets: { brackets: ["[", "{", '"'] },
-    indentOnInput: /^\s*[\}\]]$/,
-  },
   tokenTable: {
     "scene-heading": t.className,
     synopsis: t.docComment,
@@ -92,45 +81,43 @@ export const fountainLanguage = StreamLanguage.define({
   },
 });
 
+export const fountainHighlight = HighlightStyle.define([
+  { tag: t.lineComment, color: "#444" },
+  { tag: t.docComment, color: "#888" },
+  { tag: t.className, fontWeight: 600 },
+  { tag: t.heading2, fontWeight: 600, display: "block", textAlign: "center" },
+  { tag: t.keyword, fontWeight: 600, display: "block", textAlign: "right" },
+  {
+    tag: t.comment,
+    fontStyle: "italic",
+    display: "block",
+    textAlign: "center",
+  },
+  {
+    tag: t.propertyName,
+    color: "#225",
+    display: "block",
+    textAlign: "center",
+  },
+  { tag: t.string, color: "#252", display: "block", textAlign: "center" },
+]);
+
 export function fountain() {
   return new LanguageSupport(fountainLanguage);
 }
 
-// export const fountainHighlight = HighlightStyle.define([
-//   { tag: t.keyword, color: "#fc6" },
-//   { tag: t.lineComment, color: "#444" },
-//   { tag: t.docComment, color: "#888" },
-//   { tag: t.className, fontWeight: 600 },
-//   { tag: t.heading2, fontWeight: 600, display: "block", textAlign: "center" },
-//   { tag: t.keyword, fontWeight: 600, display: "block", textAlign: "right" },
-//   {
-//     tag: t.comment,
-//     fontStyle: "italic",
-//     display: "block",
-//     textAlign: "center",
-//   },
-//   {
-//     tag: t.propertyName,
-//     color: "#225",
-//     display: "block",
-//     textAlign: "center",
-//   },
-//   { tag: t.string, color: "#252", display: "block", textAlign: "center" },
-// ]);
+class FountainPlugin implements PluginValue {
+  constructor(view: EditorView) {}
 
-// class FountainPlugin implements PluginValue {
-//   constructor(view: EditorView) {
-//     view.dispatch({ effects: StateEffect.appendConfig.of([fountainLanguage]) });
-//   }
+  update(update: ViewUpdate) {
+    // view.dispatch({
+    //   effects: [StateEffect.appendConfig.of([fountain()])],
+    // });
+  }
 
-//   update(update: ViewUpdate) {
-//     // ...
-//   }
+  destroy() {
+    // ...
+  }
+}
 
-//   destroy() {
-//     // ...
-//   }
-// }
-// export const fountainPlugin = ViewPlugin.fromClass(FountainPlugin);
-
-export const fountainPlugin: Extension = (() => [fountain()])();
+export const fountainPlugin = ViewPlugin.fromClass(FountainPlugin);
