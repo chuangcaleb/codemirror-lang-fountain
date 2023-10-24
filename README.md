@@ -2,7 +2,7 @@
 
 **Naive CM5 StreamParser implementation for the [Fountain screenplay syntax](https://fountain.io/).** (currently abandoned)
 
-Try it out in this (live demo)(<https://chuangcaleb.github.io/codemirror-lang-fountain/>)!
+Try it out in this [live demo](<https://chuangcaleb.github.io/codemirror-lang-fountain/>)!
 
 ![demo screenshot](docs/demo.png)
 
